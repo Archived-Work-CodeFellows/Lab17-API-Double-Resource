@@ -37,5 +37,43 @@ namespace ToDoApi.Controllers
             }
             return item;
         }
+
+        [HttpPost]
+        public IActionResult Create(ToDoItem item)
+        {
+            _context.ToDoItems.Add(item);
+            _context.SaveChanges();
+
+            return CreatedAtRoute("GetToDo", new { id = item.ID }, item);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(long id, ToDoItem item)
+        {
+            var todo = _context.ToDoItems.Find(id);
+            if(todo == null)
+            {
+                return NotFound();
+            }
+
+            todo.IsDone = item.IsDone;
+            todo.Name = item.Name;
+            _context.ToDoItems.Update(todo);
+            _context.SaveChanges();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(long id)
+        {
+            var todo = _context.ToDoItems.Find(id);
+            if(todo == null)
+            {
+                return NotFound();
+            }
+            _context.ToDoItems.Remove(todo);
+            _context.SaveChanges();
+            return NoContent();
+        }
     }
 }

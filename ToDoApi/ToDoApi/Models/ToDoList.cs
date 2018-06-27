@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace ToDoApi.Models
 {
-    public class ToDoItem
+    public class ToDoList
     {
-        public long ID { get; set; }
+        public int ID { get; set; }
         public string Name { get; set; }
+        public IEnumerable<ToDoItem> ToDoItems { get; set; }
         public bool IsDone { get; set; }
-        public long ListID { get; set; }
     }
 }

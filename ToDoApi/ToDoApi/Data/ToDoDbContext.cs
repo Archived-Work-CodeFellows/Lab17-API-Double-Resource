@@ -14,5 +14,6 @@ namespace ToDoApi.Data
 
         }
         public DbSet<ToDoItem> ToDoItems { get; set; }
+        public DbSet<ToDoList> ToDoLists { get; set; }
     }
 }

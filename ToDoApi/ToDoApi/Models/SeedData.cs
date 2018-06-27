@@ -15,7 +15,7 @@ namespace ToDoApi.Models
             using (var context = new ToDoDbContext(
                 serviceProvider.GetRequiredService<DbContextOptions<ToDoDbContext>>()))
             {
-                if (context.ToDoItems.Any())
+                if (context.ToDoItems.Any() || context.ToDoLists.Any())
                 {
                     return;
                 }
@@ -24,16 +24,28 @@ namespace ToDoApi.Models
                     new ToDoItem
                     {
                         Name = "Item 1",
-                        IsDone = false
+                        IsDone = false,
+                        ListID = 1
                     },
                     new ToDoItem
                     {
                         Name = "Item 2",
-                        IsDone = true
+                        IsDone = true,
+                        ListID = 1
                     },
                     new ToDoItem
                     {
                         Name = "Item 3",
+                        IsDone = false,
+                        ListID = 1
+                    }
+                   );
+                context.SaveChanges();
+
+                context.ToDoLists.AddRange(
+                    new ToDoList
+                    {
+                        Name = "Default List",
                         IsDone = false
                     }
                    );
