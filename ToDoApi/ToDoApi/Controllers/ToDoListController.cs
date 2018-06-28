@@ -69,9 +69,16 @@ namespace ToDoApi.Controllers
         public async Task<IActionResult> Delete([FromRoute]int id)
         {
             var toDoList = await _context.ToDoLists.FindAsync(id);
-            if(toDoList == null)
+            if(toDoList == null || id == 1)
             {
                 return NotFound();
+            }
+
+            var toDoItems = _context.ToDoItems.Where(i => i.ListID == id).ToList();
+
+            foreach(var item in toDoItems)
+            {
+                _context.ToDoItems.Remove(item);
             }
             _context.ToDoLists.Remove(toDoList);
             await _context.SaveChangesAsync();

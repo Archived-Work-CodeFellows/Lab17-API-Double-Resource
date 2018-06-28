@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDoApi.Data;
 
 namespace ToDoApi.Migrations
 {
     [DbContext(typeof(ToDoDbContext))]
-    partial class ToDoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180628171454_add-todolist-field-on-item")]
+    partial class addtodolistfieldonitem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,13 +33,11 @@ namespace ToDoApi.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("ToDoList");
-
-                    b.Property<int?>("ToDoListID");
+                    b.Property<int?>("TDListID");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ToDoListID");
+                    b.HasIndex("TDListID");
 
                     b.ToTable("ToDoItems");
                 });
@@ -59,9 +59,9 @@ namespace ToDoApi.Migrations
 
             modelBuilder.Entity("ToDoApi.Models.ToDoItem", b =>
                 {
-                    b.HasOne("ToDoApi.Models.ToDoList")
+                    b.HasOne("ToDoApi.Models.ToDoList", "TDList")
                         .WithMany("ToDoItems")
-                        .HasForeignKey("ToDoListID");
+                        .HasForeignKey("TDListID");
                 });
 #pragma warning restore 612, 618
         }

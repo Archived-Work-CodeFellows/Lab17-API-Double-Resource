@@ -33,12 +33,18 @@ namespace ToDoApi.Controllers
             {
                 return NotFound();
             }
+            ToDoList toDoList = _context.ToDoLists.First(l => l.ID == item.ListID);
+            item.ToDoList = toDoList.Name;
             return item;
         }
 
         [HttpPost]
         public IActionResult Create(ToDoItem item)
         {
+            if(item.ListID == 0)
+            {
+                item.ListID = 1;
+            }
             _context.ToDoItems.Add(item);
             _context.SaveChanges();
 
@@ -72,6 +78,7 @@ namespace ToDoApi.Controllers
             {
                 return NotFound();
             }
+
             _context.ToDoItems.Remove(todo);
             await _context.SaveChangesAsync();
             return NoContent();

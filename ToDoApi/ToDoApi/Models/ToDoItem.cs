@@ -11,5 +11,6 @@ namespace ToDoApi.Models
         public string Name { get; set; }
         public bool IsDone { get; set; }
         public long ListID { get; set; }
+        public string ToDoList { get; set; }
     }
 }
