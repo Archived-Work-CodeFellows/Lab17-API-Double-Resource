@@ -78,6 +78,7 @@ namespace ToDoApi.Controllers
             {
                 return RedirectToAction("Create", list);
             }
+            list.ID = id;
             _context.Entry(toDoList).State = EntityState.Detached;
 
             toDoList = list;
