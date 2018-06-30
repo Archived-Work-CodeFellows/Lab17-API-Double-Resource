@@ -38,16 +38,16 @@ namespace ToDoApi.Controllers
         /// <param name="id">Id of todo itme</param>
         /// <returns>Null if it doesnt exist or the item</returns>
         [HttpGet("{id}", Name = "GetToDo")]
-        public ActionResult<ToDoItem> GetById([FromRoute]long id)
+        public async Task<ActionResult<ToDoItem>> GetById([FromRoute]long id)
         {
-            var item = _context.ToDoItems.Find(id);
+            var item = await _context.ToDoItems.FindAsync(id);
             if (item == null)
             {
                 return NotFound();
             }
-            ToDoList toDoList = _context.ToDoLists.First(l => l.ID == item.ListID);
+            ToDoList toDoList = _context.ToDoLists.FirstOrDefault(l => l.ID == item.ListID);
             item.ToDoList = toDoList.Name;
-            return item;
+            return Ok(item);
         }
         /// <summary>
         /// Action that allows us to create a new todo
@@ -55,14 +55,14 @@ namespace ToDoApi.Controllers
         /// <param name="item">ToDoItem object of data from the body</param>
         /// <returns>CreatedAtRoute status and redirects to a get</returns>
         [HttpPost]
-        public IActionResult Create([FromBody]ToDoItem item)
+        public async Task<IActionResult> Create([FromBody]ToDoItem item)
         {
             if(item.ListID == 0)
             {
                 item.ListID = 1;
             }
-            _context.ToDoItems.Add(item);
-            _context.SaveChanges();
+            await _context.ToDoItems.AddAsync(item);
+            await _context.SaveChangesAsync();
 
             return CreatedAtRoute("GetToDo", new { id = item.ID }, item);
         }
@@ -81,6 +81,7 @@ namespace ToDoApi.Controllers
             {
                 return RedirectToAction("Create", item);
             }
+            item.ID = id;
             _context.Entry(todo).State = EntityState.Detached;
             todo = item;
 
