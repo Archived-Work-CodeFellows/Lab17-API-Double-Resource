@@ -81,6 +81,7 @@ namespace ToDoApi.Controllers
             {
                 return RedirectToAction("Create", item);
             }
+            item.ID = id;
             _context.Entry(todo).State = EntityState.Detached;
             todo = item;
 

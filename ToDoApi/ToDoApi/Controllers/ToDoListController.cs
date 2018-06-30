@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ToDoApi.Data;
 using ToDoApi.Models;
 
@@ -72,14 +73,14 @@ namespace ToDoApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update([FromRoute]int id, [FromBody]ToDoList list)
         {
-            var toDoList = await _context.ToDoLists.FindAsync(id);
+            ToDoList toDoList = await _context.ToDoLists.FindAsync(id);
             if(toDoList == null)
             {
                 return RedirectToAction("Create", list);
             }
+            _context.Entry(toDoList).State = EntityState.Detached;
 
-            toDoList.Name = list.Name;
-            toDoList.IsDone = list.IsDone;
+            toDoList = list;
             _context.ToDoLists.Update(toDoList);
             await _context.SaveChangesAsync();
             return NoContent();
