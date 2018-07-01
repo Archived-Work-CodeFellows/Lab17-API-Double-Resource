@@ -17,25 +17,25 @@ Visit the api [here](http://eisj-todoapi.azurewebsites.net/api/todo) to see a wo
 ***
 ### Visuals (taken from deployed site/postman app)
 * GET: api/todo
-![GET todo](get_todo.PNG)
+![GET todo](visuals/get_todo.PNG)
 * GET: api/todolist
-![GET todo](get_todolist.PNG)
+![GET todo](visuals/get_todolist.PNG)
 * GET: api/todo/:id
-![GET todo/:id](get_todo_id.PNG)
+![GET todo/:id](visuals/get_todo_id.PNG)
 * GET: api/todolist/:
-![GET todo/:id](get_todolist_id.PNG)
+![GET todo/:id](visuals/get_todolist_id.PNG)
 #### Using Postman Application
 * POST: api/todo
-![POST todo](post_todo_pm.PNG)
+![POST todo](visuals/post_todo_pm.PNG)
 * POST: api/todolist
-![POST todo](post_todolist_pm.PNG)
+![POST todo](visuals/post_todolist_pm.PNG)
 * PUT: api/todo/:id
-![PUT todo/:id](put_todo_pm.PNG)
+![PUT todo/:id](visuals/put_todo_pm.PNG)
 * PUT: api/todolist/Id
-![PUT todo/:id](put_todolist_pm.PNG)
+![PUT todo/:id](visuals/put_todolist_pm.PNG)
 * DELETE: api/todo/:id
-![DELETE todo/:id](delete_todo.PNG)
+![DELETE todo/:id](visuals/delete_todo.PNG)
 * DELETE: api/todolist/:id
-![DELETE todolist/:id](delete_todolist.PNG)
-![GET todo](get_todo2.PNG)
+![DELETE todolist/:id](visuals/delete_todolist.PNG)
+![GET todo](visuals/get_todo2.PNG)
 ***
