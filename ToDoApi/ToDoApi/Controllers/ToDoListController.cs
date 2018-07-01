@@ -30,7 +30,7 @@ namespace ToDoApi.Controllers
         [HttpGet]
         public ActionResult<List<ToDoList>> GetAll()
         {
-            return _context.ToDoLists.ToList();
+            return _context.ToDoLists.ToList();           
         }
         /// <summary>
         /// Action that returns a specific list and what tasks
