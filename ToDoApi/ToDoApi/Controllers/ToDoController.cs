@@ -29,7 +29,13 @@ namespace ToDoApi.Controllers
         [HttpGet]
         public ActionResult<List<ToDoItem>> GetAll()
         {
-            return _context.ToDoItems.ToList();
+            var toDoItems = _context.ToDoItems.ToList();
+            foreach(var item in toDoItems)
+            {
+                ToDoList list = _context.ToDoLists.FirstOrDefault(i => i.ID == item.ListID);
+                item.ToDoList = list.Name;
+            }
+            return toDoItems;
         }
         /// <summary>
         /// Action that allows us to get a ToDo item
